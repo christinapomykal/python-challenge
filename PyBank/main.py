@@ -36,11 +36,25 @@ print("Total Months: " + str(len(date)))
 #     print(x)
 
 netTotal = 0
+biggestDelta = 0
+biggestDeltaDate = ""
+deltaList = []
 
 for i in range(len(profitLoss)):
-    print(str(i) + "--" + str(profitLoss[i]))
+    print(str(i) + "--" + str(profitLoss[i]) + "-- On: " + date[i])
     netTotal = netTotal + int(profitLoss[i]) # is the same as: netTotal += profitLoss[i]
     print(str(netTotal))
+
+    if i > 0:
+        currentDelta = int(profitLoss[i]) - int(profitLoss[i - 1])
+        print("Current Delta: " + str(currentDelta))
+        if currentDelta > biggestDelta:
+            biggestDelta = currentDelta
+            biggestDeltaDate = date[i]
+
+            print("Biggest Delta: " + str(biggestDeltaDate))
+
+    
 
 print("Grand Total: " + str(netTotal))
 
