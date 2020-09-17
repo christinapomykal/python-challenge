@@ -72,4 +72,15 @@ print("Grand Total: $" + str(netTotal))
 print("Average Change: $" + str(round(avgChange, 2)))
 print("Greatest Increase in Profits: " + str(biggestDeltaDate) + " ($" + str(biggestDelta) + ")")
 print("Greatest Decrease in Profits: " + str(biggestLossDate) + " ($" + str(biggestLoss) + ")")
-print("Biggest Loss: " + str(biggestLoss))
+
+output_path = os.path.join("Analysis", "pyBankAnalysis.txt")
+# print(output_path)
+
+with open(output_path, "w") as txtfile:
+    txtfile.write("Financial Analysis\n")
+    txtfile.write("--------------------------------\n")
+    txtfile.write("Total Months: " + str(len(date)) + "\n")
+    txtfile.write("Grand Total: $" + str(netTotal) + "\n")
+    txtfile.write("Average Change: $" + str(round(avgChange, 2)) + "\n")
+    txtfile.write("Greatest Increase in Profits: " + str(biggestDeltaDate) + " ($" + str(biggestDelta) + ")\n")
+    txtfile.write("Greatest Decrease in Profits: " + str(biggestLossDate) + " ($" + str(biggestLoss) + ")\n")
