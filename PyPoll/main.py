@@ -8,11 +8,10 @@ csvpath = os.path.join("Resources", "election_data.csv")
 
 # Lists or dictionaries?
 totalVote = 0
-voteReceived = []
-# tally = {
-    # candNames: counter of votes
-# }
-# tallyDict = {voteReceived: 0 for voteReceived in voteReceived}
+uniqueCandName = []
+# tally is a dict = {uniqueCandName: candsTotalVotes}
+tally = {}
+
 
 with open(csvpath) as csvfile:
     csvreader = csv.reader(csvfile, delimiter=",")
@@ -25,14 +24,16 @@ with open(csvpath) as csvfile:
         totalVote += 1
 
         # Find unique names
-        if row[2] not in voteReceived: 
-            voteReceived.append(row[2])
-        
-        # if row[2] == tallyDict
+        if row[2] not in tally.keys(): 
+            # build key with uniqueCandName and add key:value pair to dict with value of 1 vote
+            tally[row[2]] = 1
+        else:
+            # add value 1 vote if uniqueCandName already a key in tally dict
+            tally[row[2]] += 1 
+            
+# After for loop, tally dict now filled with unique keys (uniqueCandName) with the associated value (candsTotalVotes)
+print(tally)
 
-tallyDict = {voteReceived: 0 for voteReceived in voteReceived}
-# tally["candNames"] = voteReceived
-
-print(totalVote)
-print(voteReceived)
-print(tallyDict)
+# Now loop through the dict, and do the math per key:value in dict
+# find % by pull value from the dict for that key / totalVote
+# Winner is comparing all the values with the key
