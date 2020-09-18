@@ -1,23 +1,38 @@
-# Import os and csv modules
+# Dependencies
 
 import os
 import csv
 
 csvpath = os.path.join("Resources", "election_data.csv")
-print(csvpath)
+# print(csvpath)
 
-# Lists of data or dictionaries? look at class 3_1, activity 08 wrestling
-vote = []
-candidate = []
+# Lists or dictionaries?
+totalVote = 0
+voteReceived = []
+# tally = {
+    # candNames: counter of votes
+# }
+# tallyDict = {voteReceived: 0 for voteReceived in voteReceived}
 
 with open(csvpath) as csvfile:
-    # CSV reader specifies delimiter and variable that holds contents
     csvreader = csv.reader(csvfile, delimiter=",")
     
-    # Read header row first (skip if no header)
+    # Read header row
     csv_header = next(csvreader)
 
     for row in csvreader: 
-        vote.append(row[0])
+        # Counter of total votes
+        totalVote += 1
+
+        # Find unique names
+        if row[2] not in voteReceived: 
+            voteReceived.append(row[2])
         
-        
+        # if row[2] == tallyDict
+
+tallyDict = {voteReceived: 0 for voteReceived in voteReceived}
+# tally["candNames"] = voteReceived
+
+print(totalVote)
+print(voteReceived)
+print(tallyDict)
