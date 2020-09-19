@@ -33,7 +33,6 @@ with open(csvpath) as csvfile:
 winnerVote = 0
 winnerName = ""
 voter_outputs = []
-text_output = ""
 
 # After for loop, tally dict now filled with unique keys (uniqueCandName) with the associated value (candsTotalVotes)
 for uniqueCandName in tally: 
@@ -46,9 +45,7 @@ for uniqueCandName in tally:
         winnerVote = tally[uniqueCandName]
         winnerName = uniqueCandName
 
-for candidate in voter_outputs: 
-    # print(candidate)
-    text_output = text_output + candidate + "\n"
+text_output = "\n".join(voter_outputs)
 
 print("Election Results")
 print("--------------------")
@@ -64,7 +61,7 @@ output_textfile = (
     "--------------------\n"
     f"Total Votes: {totalVote}\n"
     "--------------------\n"   
-    f"{text_output}"
+    f"{text_output}\n"
     "--------------------\n"
     f"Winner: {winnerName}\n"
     "--------------------\n"
