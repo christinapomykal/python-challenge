@@ -33,6 +33,7 @@ with open(csvpath) as csvfile:
 winnerVote = 0
 winnerName = ""
 voter_outputs = []
+text_output = ""
 
 # After for loop, tally dict now filled with unique keys (uniqueCandName) with the associated value (candsTotalVotes)
 for uniqueCandName in tally: 
@@ -45,23 +46,31 @@ for uniqueCandName in tally:
         winnerVote = tally[uniqueCandName]
         winnerName = uniqueCandName
 
+for candidate in voter_outputs: 
+    # print(candidate)
+    text_output = text_output + candidate + "\n"
+
 print("Election Results")
 print("--------------------")
 print(f"Total Votes: {totalVote}")
 print("--------------------")    
-print(voter_outputs)
+print(text_output)
 print("--------------------")
 print(f"Winner: {winnerName}")
 print("--------------------")
 
-output_path = os.path.join("Analysis", "pyPollAnalysis.txt")
+output_textfile = (
+    "Election Results\n"
+    "--------------------\n"
+    f"Total Votes: {totalVote}\n"
+    "--------------------\n"   
+    f"{text_output}"
+    "--------------------\n"
+    f"Winner: {winnerName}\n"
+    "--------------------\n"
+)
+
+output_path = os.path.join("Analysis", "Analysis_PyPoll.txt")
 
 with open(output_path, "w") as txtfile:
-    txtfile.write("Election Results\n")
-    txtfile.write("--------------------\n")
-    txtfile.write(f"Total Votes: {totalVote}\n")
-    txtfile.write("--------------------\n")
-    txtfile.write(f"{voter_outputs}\n")
-    txtfile.write("--------------------\n")
-    txtfile.write(f"Winner: {winnerName}\n")
-    txtfile.write("--------------------\n")
+    txtfile.write(output_textfile)
