@@ -6,9 +6,9 @@ import csv
 csvpath = os.path.join("Resources", "election_data.csv")
 # print(csvpath)
 
-# Lists or dictionaries?
+# Counter for total votes
 totalVote = 0
-# tally is a dict = {uniqueCandName: candsTotalVotes}
+# holder for tally dictionary = {uniqueCandName: candsTotalVotes}
 tally = {}
 
 with open(csvpath) as csvfile:
@@ -28,27 +28,28 @@ with open(csvpath) as csvfile:
         else:
             # add value 1 vote if uniqueCandName already a key in tally dict
             tally[row[2]] += 1 
-            
+
+# Variables and lists for election results            
 winnerVote = 0
 winnerName = ""
-# voter_output = []
-print("Election Results")
-print("--------------------")
-print(f"Total Votes: {totalVote}")
-print("--------------------")
+voter_outputs = []
 
 # After for loop, tally dict now filled with unique keys (uniqueCandName) with the associated value (candsTotalVotes)
 for uniqueCandName in tally: 
     
     percentCand = (tally[uniqueCandName] / totalVote * 100)
     voter_output = f"{uniqueCandName}: {percentCand:.3f}% ({tally[uniqueCandName]})"
-    print(voter_output)
+    voter_outputs.append(voter_output)
 
     if tally[uniqueCandName] > winnerVote: 
         winnerVote = tally[uniqueCandName]
         winnerName = uniqueCandName
 
-    
+print("Election Results")
+print("--------------------")
+print(f"Total Votes: {totalVote}")
+print("--------------------")    
+print(voter_outputs)
 print("--------------------")
 print(f"Winner: {winnerName}")
 print("--------------------")
@@ -60,10 +61,7 @@ with open(output_path, "w") as txtfile:
     txtfile.write("--------------------\n")
     txtfile.write(f"Total Votes: {totalVote}\n")
     txtfile.write("--------------------\n")
-    for uniqueCandName in tally: 
-        percentCand = (tally[uniqueCandName] / totalVote * 100)
-        voter_output = f"{uniqueCandName}: {percentCand:.3f}% ({tally[uniqueCandName]})"
-        txtfile.write(f"{voter_output}\n")
+    txtfile.write(f"{voter_outputs}\n")
     txtfile.write("--------------------\n")
     txtfile.write(f"Winner: {winnerName}\n")
     txtfile.write("--------------------\n")
