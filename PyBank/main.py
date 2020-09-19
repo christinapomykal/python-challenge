@@ -64,23 +64,26 @@ for i in range(len(profitLoss)):
             biggestLossDate = date[i]
 
 avgChange = sum(deltaList) / len(deltaList)
+total_months = len(date)
 
 print("Financial Analysis")
 print("--------------------------------")
-print("Total Months: " + str(len(date)))
-print("Grand Total: $" + str(netTotal))
-print("Average Change: $" + str(round(avgChange, 2)))
-print("Greatest Increase in Profits: " + str(biggestDeltaDate) + " ($" + str(biggestDelta) + ")")
-print("Greatest Decrease in Profits: " + str(biggestLossDate) + " ($" + str(biggestLoss) + ")")
+print(f"Total Months: {total_months}")
+print(f"Grand Total: ${netTotal}")
+print(f"Average Change: $ {round(avgChange, 2)}")
+print(f"Greatest Increase in Profits: {biggestDeltaDate} (${biggestDelta})") 
+print(f"Greatest Decrease in Profits: {biggestLossDate} (${biggestLoss})")
 
-output_path = os.path.join("Analysis", "pyBankAnalysis.txt")
-# print(output_path)
+output_textfile = (
+    "Financial Analysis\n"
+    "--------------------------------\n"
+    f"Total Months: {total_months}\n"
+    f"Grand Total: ${netTotal}\n"
+    f"Average Change: $ {round(avgChange, 2)}\n"
+    f"Greatest Increase in Profits: {biggestDeltaDate} (${biggestDelta})\n"
+    f"Greatest Decrease in Profits: {biggestLossDate} (${biggestLoss})\n"
+)
+output_path = os.path.join("Analysis", "Analysis_PyBank.txt")
 
 with open(output_path, "w") as txtfile:
-    txtfile.write("Financial Analysis\n")
-    txtfile.write("--------------------------------\n")
-    txtfile.write("Total Months: " + str(len(date)) + "\n")
-    txtfile.write("Grand Total: $" + str(netTotal) + "\n")
-    txtfile.write("Average Change: $" + str(round(avgChange, 2)) + "\n")
-    txtfile.write("Greatest Increase in Profits: " + str(biggestDeltaDate) + " ($" + str(biggestDelta) + ")\n")
-    txtfile.write("Greatest Decrease in Profits: " + str(biggestLossDate) + " ($" + str(biggestLoss) + ")\n")
+    txtfile.write(output_textfile)
